@@ -22,7 +22,7 @@ module scryfall
       # @return [String]
       attr_accessor :mana_cost
 
-      # @return [Colors] Possible values include: 'W', 'U', 'B', 'R', 'G'
+      # @return [Array<Colors>]
       attr_accessor :colors
 
       # @return [Colors] Possible values include: 'W', 'U', 'B', 'R', 'G'
@@ -97,8 +97,16 @@ module scryfall
                 required: false,
                 serialized_name: 'colors',
                 type: {
-                  name: 'Enum',
-                  module: 'Colors'
+                  name: 'Sequence',
+                  element: {
+                      client_side_validation: true,
+                      required: false,
+                      serialized_name: 'ColorsElementType',
+                      type: {
+                        name: 'Enum',
+                        module: 'Colors'
+                      }
+                  }
                 }
               },
               color_indicator: {
