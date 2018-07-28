@@ -574,6 +574,80 @@ module scryfall
     end
 
     #
+    # @param id [Integer]
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
+    #
+    # @return [Card] operation results.
+    #
+    def get_by_arena_id(id, custom_headers:nil)
+      response = get_by_arena_id_async(id, custom_headers:custom_headers).value!
+      response.body unless response.nil?
+    end
+
+    #
+    # @param id [Integer]
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
+    #
+    # @return [MsRest::HttpOperationResponse] HTTP response information.
+    #
+    def get_by_arena_id_with_http_info(id, custom_headers:nil)
+      get_by_arena_id_async(id, custom_headers:custom_headers).value!
+    end
+
+    #
+    # @param id [Integer]
+    # @param [Hash{String => String}] A hash of custom headers that will be added
+    # to the HTTP request.
+    #
+    # @return [Concurrent::Promise] Promise object which holds the HTTP response.
+    #
+    def get_by_arena_id_async(id, custom_headers:nil)
+      fail ArgumentError, 'id is nil' if id.nil?
+
+
+      request_headers = {}
+      request_headers['Content-Type'] = 'application/json; charset=utf-8'
+      path_template = 'cards/arena/{id}'
+
+      request_url = @base_url || @client.base_url
+
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'id' => id},
+          headers: request_headers.merge(custom_headers || {}),
+          base_url: request_url
+      }
+      promise = @client.make_request_async(:get, path_template, options)
+
+      promise = promise.then do |result|
+        http_response = result.response
+        status_code = http_response.status
+        response_content = http_response.body
+        unless status_code == 200
+          error_model = JSON.load(response_content)
+          fail MsRest::HttpOperationError.new(result.request, http_response, error_model)
+        end
+
+        # Deserialize Response
+        if status_code == 200
+          begin
+            parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
+            result_mapper = scryfall::Models::Card.mapper()
+            result.body = @client.deserialize(result_mapper, parsed_response)
+          rescue Exception => e
+            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
+          end
+        end
+
+        result
+      end
+
+      promise.execute
+    end
+
+    #
     # @param code [String]
     # @param number [Integer]
     # @param custom_headers [Hash{String => String}] A hash of custom headers that

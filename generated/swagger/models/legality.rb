@@ -10,40 +10,52 @@ module scryfall
     #
     #
     class Legality
-      # @return [LegalStatus] Possible values include: 'legal', 'not_legal'
+      # @return [LegalStatus] Possible values include: 'legal', 'not_legal',
+      # 'restricted', 'banned'
       attr_accessor :standard
 
-      # @return [LegalStatus] Possible values include: 'legal', 'not_legal'
+      # @return [LegalStatus] Possible values include: 'legal', 'not_legal',
+      # 'restricted', 'banned'
       attr_accessor :future
 
-      # @return [LegalStatus] Possible values include: 'legal', 'not_legal'
+      # @return [LegalStatus] Possible values include: 'legal', 'not_legal',
+      # 'restricted', 'banned'
       attr_accessor :frontier
 
-      # @return [LegalStatus] Possible values include: 'legal', 'not_legal'
+      # @return [LegalStatus] Possible values include: 'legal', 'not_legal',
+      # 'restricted', 'banned'
       attr_accessor :modern
 
-      # @return [LegalStatus] Possible values include: 'legal', 'not_legal'
+      # @return [LegalStatus] Possible values include: 'legal', 'not_legal',
+      # 'restricted', 'banned'
       attr_accessor :legacy
 
-      # @return [LegalStatus] Possible values include: 'legal', 'not_legal'
+      # @return [LegalStatus] Possible values include: 'legal', 'not_legal',
+      # 'restricted', 'banned'
       attr_accessor :pauper
 
-      # @return [LegalStatus] Possible values include: 'legal', 'not_legal'
+      # @return [LegalStatus] Possible values include: 'legal', 'not_legal',
+      # 'restricted', 'banned'
       attr_accessor :vintage
 
-      # @return [LegalStatus] Possible values include: 'legal', 'not_legal'
+      # @return [LegalStatus] Possible values include: 'legal', 'not_legal',
+      # 'restricted', 'banned'
       attr_accessor :penny
 
-      # @return [LegalStatus] Possible values include: 'legal', 'not_legal'
+      # @return [LegalStatus] Possible values include: 'legal', 'not_legal',
+      # 'restricted', 'banned'
       attr_accessor :commander
 
-      # @return [LegalStatus] Possible values include: 'legal', 'not_legal'
+      # @return [LegalStatus] Possible values include: 'legal', 'not_legal',
+      # 'restricted', 'banned'
       attr_accessor :onev_one
 
-      # @return [LegalStatus] Possible values include: 'legal', 'not_legal'
+      # @return [LegalStatus] Possible values include: 'legal', 'not_legal',
+      # 'restricted', 'banned'
       attr_accessor :duel
 
-      # @return [LegalStatus] Possible values include: 'legal', 'not_legal'
+      # @return [LegalStatus] Possible values include: 'legal', 'not_legal',
+      # 'restricted', 'banned'
       attr_accessor :brawl
 
 

@@ -23,6 +23,9 @@ module scryfall
       attr_accessor :mtgo_id
 
       # @return [Integer]
+      attr_accessor :arena_id
+
+      # @return [Integer]
       attr_accessor :mtgo_foil_id
 
       # @return [String]
@@ -40,7 +43,7 @@ module scryfall
       # @return [String]
       attr_accessor :name
 
-      # @return [Layouts] Possible values include: 'normal', 'split',
+      # @return [Layouts] Possible values include: 'normal', 'split', 'flip',
       # 'transform', 'meld', 'leveler', 'saga', 'planar', 'scheme', 'vanguard',
       # 'token', 'double_faced_token', 'emblem', 'augment', 'host'
       attr_accessor :layout
@@ -81,7 +84,7 @@ module scryfall
       # @return [Array<Colors>]
       attr_accessor :color_identity
 
-      # @return [RelatedCards]
+      # @return [Array<RelatedCards>]
       attr_accessor :all_parts
 
       # @return [Array<CardFace>]
@@ -220,6 +223,14 @@ module scryfall
                 client_side_validation: true,
                 required: false,
                 serialized_name: 'mtgo_id',
+                type: {
+                  name: 'Number'
+                }
+              },
+              arena_id: {
+                client_side_validation: true,
+                required: false,
+                serialized_name: 'arena_id',
                 type: {
                   name: 'Number'
                 }
@@ -409,8 +420,16 @@ module scryfall
                 required: false,
                 serialized_name: 'all_parts',
                 type: {
-                  name: 'Composite',
-                  class_name: 'RelatedCards'
+                  name: 'Sequence',
+                  element: {
+                      client_side_validation: true,
+                      required: false,
+                      serialized_name: 'RelatedCardsElementType',
+                      type: {
+                        name: 'Composite',
+                        class_name: 'RelatedCards'
+                      }
+                  }
                 }
               },
               card_faces: {

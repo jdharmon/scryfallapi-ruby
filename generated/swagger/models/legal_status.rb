@@ -11,6 +11,8 @@ module scryfall
     module LegalStatus
       Legal = "legal"
       NotLegal = "not_legal"
+      Restricted = "restricted"
+      Banned = "banned"
     end
   end
 end

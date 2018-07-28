@@ -11,6 +11,7 @@ module scryfall
     module Layouts
       Normal = "normal"
       Split = "split"
+      Flip = "flip"
       Transform = "transform"
       Meld = "meld"
       Leveler = "leveler"

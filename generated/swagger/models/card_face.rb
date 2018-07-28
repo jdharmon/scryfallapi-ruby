@@ -25,7 +25,7 @@ module scryfall
       # @return [Array<Colors>]
       attr_accessor :colors
 
-      # @return [Colors] Possible values include: 'W', 'U', 'B', 'R', 'G'
+      # @return [Array<Colors>]
       attr_accessor :color_indicator
 
       # @return [String]
@@ -114,8 +114,16 @@ module scryfall
                 required: false,
                 serialized_name: 'color_indicator',
                 type: {
-                  name: 'Enum',
-                  module: 'Colors'
+                  name: 'Sequence',
+                  element: {
+                      client_side_validation: true,
+                      required: false,
+                      serialized_name: 'ColorsElementType',
+                      type: {
+                        name: 'Enum',
+                        module: 'Colors'
+                      }
+                  }
                 }
               },
               power: {
